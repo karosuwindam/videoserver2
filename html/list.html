@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="list.css">
+        <title>
+            list video
+        </title>
+        <script>
+            function playlistoutput(){
+                var output = "";
+                var cklist =document.getElementsByName("list");
+                for(var i=0; i < cklist.length; i++){
+                    if(cklist[i].checked){
+                        if(output ==""){
+                            output = "" + i;
+                        }else{
+                            output += "," + i;
+                        }
+                    }
+                }
+                //output = "0,1"
+                document.getElementById("listout").value = output;
+            }
+            function output(){
+                playlistoutput();
+                document.myform.submit();
+            }
+        </script>
+    </head>
+    <body>
+        <%output%>
+        <form action="/play" method="POST" id="box" name="myform">
+            <input id="listout" type="hidden" name="list" value="">
+            <input type="button" value="JS送信" id="btnjs">
+        </form>
+        <div class="button" onclick="output()">送信</div>
+        <script>
+                var btn = document.getElementById('btnjs');
+             
+                btn.addEventListener('click', function() {
+                    playlistoutput();
+                  //alert(document.myform.mytext.value);
+              
+                  //submit()でフォームの内容を送信
+                  document.myform.submit();
+                })
+              </script>
+    </body>
+</html>

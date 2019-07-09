@@ -1,0 +1,10 @@
+{
+    "server":"",
+    "port":"10000",
+    "path":"./html/",
+<<<<<<< HEAD
+    "videopath":["./"]
+=======
+    "videopath":"./video"
+>>>>>>> parent of c9276db... ok data
+}

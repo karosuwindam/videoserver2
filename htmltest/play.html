@@ -1,0 +1,168 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="play.css">
+        <title>
+            paly now
+        </title>
+        
+        <script type="text/javascript">
+            var namedata = [
+                //<%namedata%>
+                "VID_20190623_110003.mp4","VID_20190623_114642.mp4"
+            ];
+            //var name_num = <%id%>;
+            var name_num = 0;
+            var controlflag =false;
+            function videoch(num){
+                var tmp = num -0;
+                if (tmp >= namedata.length){
+                    tmp = namedata.length -1;
+                }
+                if (tmp < 0){
+                    tmp = 0;
+                }
+                name_num = tmp
+                videooutput(namedata[name_num]);
+                //document.getElementById("video").src = encodeURIComponent(namedata[name_num]);
+                //document.getElementById("title_v").innerHTML = namedata[name_num];
+                //document.title = namedata[name_num].replace(".mp4","")
+            }
+            function videooutput(str){
+                var output = str
+                var tmp;
+                document.getElementById("video").src = encodeURIComponent(str);
+                if (output.indexOf("/",0) >= 0){
+                    tmp = output.split("/");
+                    output = tmp[tmp.length-1]
+                }
+                //console.log()
+                document.getElementById("title_v").innerHTML = output;
+                document.title = output.replace(".mp4","")
+
+            }
+            function coutdata(num){
+                var tmp = num -0;
+                var output ="";
+                name_num = name_num + tmp
+                if (name_num >= namedata.length){
+                    name_num = 0
+                }
+                if (name_num < 0){
+                    name_num = namedata.length -1
+                }
+
+                videooutput(namedata[name_num]);
+                //encodeURI
+                //document.getElementById("video").src = encodeURIComponent(namedata[name_num]);
+                //output = namedata[name_num];
+                //if (output.indexOf("/",0) >= 0){
+                //    output = output.split("/")[1];
+                //}
+                //console.log()
+                //document.getElementById("title_v").innerHTML = output;
+                //document.title = output.replace(".mp4","")
+
+            }
+            function pauseVideo() {
+                //動画を一時停止
+                var video =document.getElementById("video");
+                console.log(video.paused);
+                video.pause();
+            }
+            function playVideo() {
+                //動画を一時停止
+                var video =document.getElementById("video");
+                console.log(video.paused);
+                video.play();
+            }
+            function playpauseVideo(){
+                var video = document.getElementById("video");
+                if (video.paused){
+                    playVideo();
+                    document.getElementById("playpause").innerHTML = "="
+                }else{
+                    pauseVideo();
+                    document.getElementById("playpause").innerHTML = ">"
+                }
+            }
+            function listwrite(){
+                var numlist
+                document.open();
+                document.write("list<br>");
+                for (var i = 0; i < namedata.length; i++){
+                    numlist = "<li>";
+                    numlist = numlist + "<a href='#' onclick=\"videoch("+(i)+");return false\""
+                    //numlist += "<a href='#' onclick();return false\") >"
+                    numlist = numlist + "title =\""+namedata[i] +"\">"+(i+1)+"<br>&nbsp;"+namedata[i]+"</a></li>";
+                    console.log(numlist)
+                    document.write(numlist);
+
+                }
+                document.close();
+            }
+            function onloadbody(){
+                //document.getElementById("video").src = encodeURIComponent(namedata[name_num]);
+                //document.getElementById("title_v").innerHTML = namedata[name_num];
+                //document.title = namedata[name_num].replace(".mp4","")
+                videooutput(namedata[name_num]);
+            }
+            function onloadvideo(){
+                //video.play()
+                onloadbody()
+                var video =document.getElementById("video");
+                
+                //console.log("aaa")
+                video.addEventListener("ended", function(){
+                    coutdata(1);
+                    //document.getElementById("kanryou").innerHTML = "動画の再生が完了しました。";
+                }, false);
+                //console.log("bb")
+            }
+            function maxvideo(){
+                var video = document.getElementById("video");
+                
+                if ( video.requestFullScreen ) {
+                    video.requestFullScreen();
+                } else if ( video.webkitRequestFullScreen ) {
+                    video.webkitRequestFullScreen();
+                } else if ( video.mozRequestFullScreen ) {
+                    video.mozRequestFullScreen();
+                } else if ( video.msRequestFullScreen ) {
+                    video.msRequestFullScreen();
+                } else if ( video.oRequestFullScreen ) {
+                    video.oRequestFullScreen();
+                }
+
+            }
+            //コントローラの表示非表示
+            function controlview(){
+                var video = document.getElementById("video");
+                controlflag = !controlflag;
+                video.controls = controlflag;
+
+            }
+        </script>
+    </head>
+    <body onload="onloadbody()">
+        <!--TOP-->
+        <div class="top_body" id="top">
+            
+            <a href="#" class="button" onclick="coutdata(-1);return false"><<</a> <a href="#" class="button" onclick="coutdata(1);return false">>></a>
+            <!--<a href="#" onclick="playVideo();return false">></a> <a href="#" onclick="pauseVideo();return false">=</a>-->
+            <a class="button" id="playpause" href="#" onclick="playpauseVideo();return false"> = </a>
+            <a class="button" id="bodymax" href="#" onclick="maxvideo();return false">[]</a>
+            <a class="button" id="ctlv" href="#" onclick="controlview();return false">[]</a>
+        </div>
+        <!--Midle-->
+        <div class="mid_body">
+            <div class="mid_l_body">
+                <video id="video" src="" autoplay onclick="playpauseVideo()"></video>
+            </div>
+            <div class="mid_r_body">
+                <script>listwrite()</script>
+            </div>
+        </div>
+        <!--Bottom-->
+        <div class="bottom_body" id="bottom">bottom</div>
+    </body>
+</html>
