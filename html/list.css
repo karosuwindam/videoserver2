@@ -2,7 +2,7 @@ form{
     position: fixed;
     width:100px;
     height: 50px;
-    background-color: gray;
+    /*background-color: gray;*/
     left:50%;
     top:20%;
 }
@@ -38,4 +38,11 @@ div.button:hover{
 }
 div.button:active{
     color:black;
+}
+input[type=checkbox] {
+	width:			40px;
+	height:			40px;
+	/*-moz-transform:		scale(1.4);*/
+	/*-webkit-transform:	scale(1.4);*/
+	/*transform:		scale(1.4);*/
 }

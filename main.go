@@ -39,8 +39,8 @@ var Cdata jsonread.Setupdata
 //deflistcreat PlaylistDataを作るプログラム
 func deflistcreat() {
 	dirClass := new(dirread.Dirtype)
-<<<<<<< HEAD
-	countmaxb = 0
+	countmaxb := 0
+	countmax := 0
 	//Todo:
 	for j := 0; j < len(Cdata.Videopath); j++ {
 		//for j := 0; j < 1; j++ {
@@ -73,12 +73,6 @@ func deflistcreat() {
 	//	dirClass.Count = countTmp
 	PlaylistData = listup(*dirClass, ".mp4")
 	//fmt.Println(PlaylistData)
-=======
-	dirClass.Setup(Cdata.Videopath)
-	dirClass.Read()
-	PlaylistData = listup(*dirClass, ".mp4")
-
->>>>>>> parent of c9276db... ok data
 }
 
 //main実行

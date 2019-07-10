@@ -11,12 +11,9 @@
                 //"VID_20190623_110003.mp4","VID_20190623_114642.mp4"
             ];
             var name_num = <%id%>;
-<<<<<<< HEAD
             //var name_num = 0;
             var controlflag =false;     //コントローラー
             var loopflag =true;     //ループ
-=======
->>>>>>> parent of c9276db... ok data
             function videoch(num){
                 var tmp = num -0;
                 if (tmp >= namedata.length){
@@ -33,9 +30,11 @@
             }
             function videooutput(str){
                 var output = str
+                var tmp;
                 document.getElementById("video").src = encodeURIComponent(str);
                 if (output.indexOf("/",0) >= 0){
-                    output = output.split("/")[1];
+                    tmp = output.split("/");
+                    output = tmp[tmp.length-1]
                 }
                 //console.log()
                 document.getElementById("title_v").innerHTML = output;
@@ -125,7 +124,6 @@
                 }, false);
                 //console.log("bb")
             }
-<<<<<<< HEAD
             function maxvideo(){
                 var video = document.getElementById("video");
                 
@@ -171,27 +169,6 @@
             <a class="button" id="bodymax" href=javascript:void(0); onclick="maxvideo();return false">[&nbsp;]</a>
             <a class="button" id="ctlv" href=javascript:void(0); onclick="controlview();return false">[&nbsp;]</a>
             <a class="button" id="loop" href=javascript:void(0); onclick="looponoff();return false">loop</a>
-=======
-        </script>
-    </head>
-    <body onload="onloadvideo()">
-        <div id="top_body">
-                <a href="#" onclick="coutdata(-1);return false"><<</a> <a href="#" onclick="coutdata(1);return false">>></a>
-                <!--<a href="#" onclick="playVideo();return false">></a> <a href="#" onclick="pauseVideo();return false">=</a>-->
-                <a id="playpause" href="#" onclick="playpauseVideo();return false">=</a>
-        </div>
-        <div id="main_body_l">
-            <table>
-                <tr>
-                    <td width="80%">
-                        <video id="video" width="1280px" height="720px" src="" autoplay onclick="playpauseVideo()"></video>
-                    </td>
-                    <td width="20%">
-                        <script>listwrite()</script>
-                    </td>
-                </tr>
-            </table>
->>>>>>> parent of c9276db... ok data
         </div>
         <!--Midle-->
         <div class="mid_body">

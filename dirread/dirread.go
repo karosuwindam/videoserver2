@@ -34,21 +34,18 @@ func (t *Dirtype) Setup(s string) {
 	}
 }
 
-func (t *Dirtype) Read() int {
+func (t *Dirtype) Read(s string) int {
 	var tmp []filedata
+	tmp = append(tmp, t.Data...)
 	if t.path == "" {
 		return -1
 	}
-	files, err := ioutil.ReadDir(t.path)
+	files, err := ioutil.ReadDir(t.path + s)
 	if err != nil {
 		log.Fatal(err)
 	}
 	for _, f := range files {
-<<<<<<< HEAD
 		tmp2 := filedata{s + f.Name(), f.IsDir(), f.Size(), f.ModTime(), t.path + s}
-=======
-		tmp2 := filedata{f.Name(), f.IsDir(), f.Size()}
->>>>>>> parent of c9276db... ok data
 		tmp = append(tmp, tmp2)
 	}
 	t.Data = tmp
