@@ -16,18 +16,18 @@ func listup(str dirread.Dirtype, key string) []PlayListA {
 	num := 0
 
 	for i := 0; i < len(str.Data); i++ {
+		if i >= str.Count[num] {
+			tmp.PlayData = name
+			list = append(list, tmp)
+			name = []string{}
+			num++
+		}
 		if !str.Data[i].Folder { //フォルダ以外
 			if strings.Index(str.Data[i].Name, key) >= 0 { //keyワード検索
 				if str.Data[i].Size > 0 { //ファイルサイズで0は無視
 					name = append(name, str.Data[i].Name)
 				}
 			}
-		}
-		if i >= str.Count[num] {
-			tmp.PlayData = name
-			list = append(list, tmp)
-			name = []string{}
-			num++
 		}
 	}
 	tmp.PlayData = name
